@@ -18,6 +18,7 @@ from django.urls import path
 import cashbookapp.views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import include
 
 urlpatterns =[
     path('admin/', admin.site.urls),
@@ -27,4 +28,5 @@ urlpatterns =[
     path('detail/<str:id>/', cashbookapp.views.detail, name='detail'),
     path('edit/<str:id>/', cashbookapp.views.edit, name='edit'),
     path('delete/<str:id>/', cashbookapp.views.delete, name='delete'),
+    path('account', include('account.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
