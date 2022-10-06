@@ -9,17 +9,22 @@
 <body>
     <div class="sidebar">
         <ul>
+            {% if user.is_authenticated %} 
             <li><a href="write">가계부 쓰기</a></li>
+            {% else %} 
+            <li><a href="{% url 'login' %}">로그인</a></li>
+            {% endif %}
             <li><a href="read">가계부 목록</a></li>
             {% if user.is_active %} 
                 <li>{{ user.username }}님 환영합니다.</a></li>
                 <li><a href="{% url 'logout' %}">로그아웃</a></li>
+                <li><a href="{% url 'change_password' %}">비밀번호 변경</a></li>
             {% else %}
             <li><a href="{% url 'login' %}">로그인</a></li>
             <li><a href="{% url 'signup' %}">회원가입</a></li>
             {% endif %}
             <li><a href="https://search.shopping.naver.com/search/all?query=%EA%B0%80%EA%B3%84%EB%B6%80&cat_id=&frm=NVSHATC">가계부 구입</a></li>
-     </ul>
+    </ul>
     </div>
     <div class="header">
         <h1>🌹🌷가계부🌹🌷</h1>
