@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CashbookForm
 from django.utils import timezone
 from .models import Cashbook
+from django.contrib.auth.forms import AuthenticationForm
+
 
 # Create your views here.
 
@@ -16,7 +18,6 @@ def write(request):
             form.pub_date = timezone.now()
             form.save()
             return redirect('main')
-
         else:
             context = {
                 'form':form,
@@ -25,6 +26,8 @@ def write(request):
     else:
         form = CashbookForm
         return render(request, 'write.html', {'form':form})
+
+            
         
 def read(request):
     cashbooks = Cashbook.objects
@@ -51,3 +54,4 @@ def delete(request, id):
     cashbooks = get_object_or_404(Cashbook, id=id)
     cashbooks.delete()
     return redirect('read')
+

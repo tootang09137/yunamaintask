@@ -58,3 +58,20 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'account/change_password.html', {'form': form})
 
+def mypage(request, id):
+    user = request.user
+    user_id = str(user.id)
+    if (user.is_authenticated == True) and (user_id == id) :
+        user = User.objects.get(id=id)
+        context = {
+            'user':user,
+        }
+        return render(request, 'mypage.html', context)
+    else:
+        msg = "내 정보 페이지는 로그인 후 접근 가능합니다."
+        form = AuthenticationForm()
+        context = {
+            'msg':msg,
+            'form':form
+        }
+        return render(request, 'login.html', context)

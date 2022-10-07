@@ -9,11 +9,11 @@
 <body>
     <div class="sidebar">
         <ul>
-            {% if user.is_authenticated %} 
+            
             <li><a href="write">가계부 쓰기</a></li>
-            {% else %} 
+        
             <li><a href="{% url 'login' %}">로그인</a></li>
-            {% endif %}
+            
             <li><a href="read">가계부 목록</a></li>
             {% if user.is_active %} 
                 <li>{{ user.username }}님 환영합니다.</a></li>
@@ -40,7 +40,6 @@
             </div>
             <div class="img-cover"></div>
         </div>
-       
         <hr>
         <div class="soge">
             <div class="skhu2">
