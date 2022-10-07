@@ -8,6 +8,9 @@
 </head>
 <body>
     <h2>write</h2>
+    {% if msg %} 
+    <p style="color: red;">{{msg}}</p>
+{% endif %}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
@@ -17,3 +20,5 @@
     </form>
 </body>
 </html>
+
+

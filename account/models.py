@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Profile(models.Model) :
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    nickname = models.CharField(max_length=10)
+    user = models.OneToOneField( User, on_delete=models.CASCADE)
+    nickname = models.CharField( max_length=10)
+    name = models.CharField(max_length=10)
     profile_image = models.ImageField(blank=True)
 

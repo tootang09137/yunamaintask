@@ -5,6 +5,7 @@ from .models import Profile
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from .forms import CustomUserChangeForm
 # Create your views here.
 
 #회원가입
@@ -66,12 +67,25 @@ def mypage(request, id):
         context = {
             'user':user,
         }
-        return render(request, 'mypage.html', context)
+        return render(request, 'account/mypage.html', context)
     else:
-        msg = "내 정보 페이지는 로그인 후 접근 가능합니다."
+        msg = "마이페이지는 로그인 후 볼 수 있습니다."
         form = AuthenticationForm()
         context = {
             'msg':msg,
             'form':form
         }
-        return render(request, 'login.html', context)
+        return render(request, 'account/login.html', context)
+
+def user_update(request):
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('main')
+    else : 
+        form = CustomUserChangeForm(instance=request.user)
+    context = {
+        'form':form,
+    }
+    return render(request, 'account/user_update.html', context)
