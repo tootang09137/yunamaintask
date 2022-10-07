@@ -62,10 +62,12 @@ def change_password(request):
 def mypage(request, id):
     user = request.user
     user_id = str(user.id)
+    profile = Profile.objects
     if (user.is_authenticated == True) and (user_id == id) :
         user = User.objects.get(id=id)
         context = {
             'user':user,
+            'profile':profile
         }
         return render(request, 'account/mypage.html', context)
     else:
